@@ -10,8 +10,8 @@ WHEN I click the save button for that time block
 THEN the text for that event is saved in local storage
 WHEN I refresh the page
 THEN the saved events persist*/
+
 var currentDateEl = $("#currentDay");
-var currentDate = moment();
-moment(currentDate).format('dd, MMMM YYYY hh:mm');
+var currentDate = moment().format('dddd, MMMM Do YYYY');
 
 currentDateEl.text(currentDate);
