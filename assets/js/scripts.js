@@ -11,7 +11,7 @@ THEN the saved events persist
 
 var currentDateEl = $("#currentDay");
 var currentDate = moment().format('dddd, MMMM Do YYYY');
-var currentTime = moment().format('hh:mm a');
+var currentTime = moment().format('H');
 var tasksArray = [];
 
 // add current date to the page
@@ -22,11 +22,21 @@ tasksArray = $.map($('.hours'), function(el) {
     return {hour: 'timeBlock', value: parseInt($(el).attr('data-hour'))}
 });
 
-console.log(tasksArray);
-
 // write function to check if the time is in the past present or future
+for (i=0; i < tasksArray.length; i++) {
 
+    if (currentTime == tasksArray[i].value) {
+        console.log('timeEqual');
+    }
+    
+    if (currentTime > tasksArray[i].value) {
+        console.log('timeGreater');
+    } 
 
+    if(currentTime < tasksArray[i].value) {
+        console.log('timeLess');
+    }
+}
 
 // if time is in the past set a color
 // if time is current set a color
