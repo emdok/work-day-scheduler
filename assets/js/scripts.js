@@ -26,7 +26,8 @@ tasksArray = $.map($('.hours'), function(el) {
 for (i=0; i < tasksArray.length; i++) {
 
     if (currentTime == tasksArray[i].value) {
-        console.log('timeEqual');
+        //set className to corresponding element
+        $("ul li[data-hour="'+i'").addClass('bg-secondary');
     }
     
     if (currentTime > tasksArray[i].value) {
