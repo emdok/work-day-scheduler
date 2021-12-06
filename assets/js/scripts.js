@@ -1,52 +1,54 @@
-/*
-WHEN I click the save button for that time block
-THEN the text for that event is saved in local storage
-WHEN I refresh the page
-THEN the saved events persist
-*/
+
 
 var currentDateEl = $("#currentDay");
 var currentDate = moment().format('dddd, MMMM Do YYYY');
 var currentTime = moment().format('H');
 var tasksArray = [];
-
+var storageArray = [];
 // add current date to the page
 currentDateEl.text(currentDate);
 
 //grab all of the timeblocks data attributes
-tasksArray = $.map($('.hours'), function(el) {
-    return {hour: 'timeBlock', value: parseInt($(el).attr('data-hour'))}
+tasksArray = $.map($('.hours'), function (el) {
+    console.log(el);
+    return { hour: 'timeBlock', value: parseInt($(el).attr('data-hour')) }
 });
 
 // write function to check if the time is in the past present or future
-for (i=0; i < tasksArray.length; i++) {
+for (i = 0, j = 9; i < tasksArray.length; i++, j++) {
 
+    if (localStorage.getItem(j)) {
+        $('#textArea' + j).val(localStorage.getItem(j));
+    }
+     
     if (currentTime == tasksArray[i].value) {
         //set className to corresponding element
         var dataValue = tasksArray[i].value;
-        var taskEl = $('ul').find("[data-hour='" + dataValue +"']")
-        taskEl.parent().children().addClass('bg-warning');
+        var taskEl = $('ul').find("[data-hour='" + dataValue + "']")
+        $('#textArea' + j).addClass('present text-dark');
     }
-    
+
     if (currentTime > tasksArray[i].value) {
         var dataValue = tasksArray[i].value;
-        var taskEl = $('ul').find("[data-hour='" + dataValue +"']")
-        taskEl.parent().children().addClass('bg-secondary');
-    } 
+        var taskEl = $('ul').find("[data-hour='" + dataValue + "']")
+        $('#textArea' + j).addClass('past text-dark');
+    }
 
-    if(currentTime < tasksArray[i].value) {
+    if (currentTime < tasksArray[i].value) {
         var dataValue = tasksArray[i].value;
-        var taskEl = $('ul').find("[data-hour='" + dataValue +"']")
-        taskEl.parent().children().addClass('bg-info');
+        var taskEl = $('ul').find("[data-hour='" + dataValue + "']")
+        $('#textArea' + j).addClass('future text-dark');
     }
 }
 
 // write function to listen for a click on specific element to save data in text area to local storage
-$('button').on("click", function() {
-    event.preventDefault();
+for (let i = 9; i < 17; i++) {
 
-    var data = $(this).closest('textarea').val();
-    console.log(data);
-});
+    $("#" + i).on("click", function () {
+        event.preventDefault();
+        var data = $("#textArea" + i).val();
+        localStorage.setItem(i, data);
+    });
+};
 
 
