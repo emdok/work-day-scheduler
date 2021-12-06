@@ -1,6 +1,4 @@
 /*
-WHEN I click into a time block
-THEN I can enter an event
 WHEN I click the save button for that time block
 THEN the text for that event is saved in local storage
 WHEN I refresh the page
@@ -43,9 +41,12 @@ for (i=0; i < tasksArray.length; i++) {
     }
 }
 
-// if time is in the past set a color
-// if time is current set a color
-// if time is in the future set a color
-
 // write function to listen for a click on specific element to save data in text area to local storage
+$('button').on("click", function() {
+    event.preventDefault();
+
+    var data = $(this).closest('textarea').val();
+    console.log(data);
+});
+
 
