@@ -32,6 +32,7 @@ for (i = 0, j = 9; i < tasksArray.length; i++, j++) {
         var dataValue = tasksArray[i].value;
         var taskEl = $('ul').find("[data-hour='" + dataValue + "']")
         $('#textArea' + j).addClass('past text-dark');
+        $('#textArea' + j).parent().addClass('past text-dark')
     }
 
     if (currentTime < tasksArray[i].value) {

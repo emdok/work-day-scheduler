@@ -38,9 +38,7 @@ textarea{
   border-radius: 15px;
 }
 
-.row {
-  white-space: pre-wrap;
-  height: 80px;
+.text-area-border {
   border-top: 1px solid white;;
 }
 
@@ -73,7 +71,7 @@ textarea{
   color: white;
 }
 
-.saveBtn i:hover {
+.saveBtn:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
 }
