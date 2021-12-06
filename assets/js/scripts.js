@@ -26,6 +26,7 @@ for (i = 0, j = 9; i < tasksArray.length; i++, j++) {
         var dataValue = tasksArray[i].value;
         var taskEl = $('ul').find("[data-hour='" + dataValue + "']")
         $('#textArea' + j).addClass('present text-dark');
+        $('#textArea' + j).parent().addClass('present text-dark')
     }
 
     if (currentTime > tasksArray[i].value) {
@@ -39,16 +40,18 @@ for (i = 0, j = 9; i < tasksArray.length; i++, j++) {
         var dataValue = tasksArray[i].value;
         var taskEl = $('ul').find("[data-hour='" + dataValue + "']")
         $('#textArea' + j).addClass('future text-dark');
+        $('#textArea' + j).parent().addClass('future text-dark')
     }
 }
 
 // write function to listen for a click on specific element to save data in text area to local storage
-for (let i = 9; i < 17; i++) {
+for (let i = 9; i < 18; i++) {
 
     $("#" + i).on("click", function () {
         event.preventDefault();
         var data = $("#textArea" + i).val();
         localStorage.setItem(i, data);
+        console.log(i);
     });
 };
 
