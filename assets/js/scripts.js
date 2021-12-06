@@ -5,6 +5,7 @@ var currentDate = moment().format('dddd, MMMM Do YYYY');
 var currentTime = moment().format('H');
 var tasksArray = [];
 var storageArray = [];
+
 // add current date to the page
 currentDateEl.text(currentDate);
 
@@ -17,18 +18,20 @@ tasksArray = $.map($('.hours'), function (el) {
 // write function to check if the time is in the past present or future
 for (i = 0, j = 9; i < tasksArray.length; i++, j++) {
 
+    // check local storage to see if any data exists to print to page
     if (localStorage.getItem(j)) {
         $('#textArea' + j).val(localStorage.getItem(j));
     }
      
     if (currentTime == tasksArray[i].value) {
-        //set className to corresponding element
+        //set Present class name to task in present time
         var dataValue = tasksArray[i].value;
         var taskEl = $('ul').find("[data-hour='" + dataValue + "']")
         $('#textArea' + j).addClass('present text-dark');
         $('#textArea' + j).parent().addClass('present text-dark')
     }
 
+    //set Present class name to task in past time
     if (currentTime > tasksArray[i].value) {
         var dataValue = tasksArray[i].value;
         var taskEl = $('ul').find("[data-hour='" + dataValue + "']")
@@ -36,6 +39,7 @@ for (i = 0, j = 9; i < tasksArray.length; i++, j++) {
         $('#textArea' + j).parent().addClass('past text-dark')
     }
 
+    //set Present class name to task in future time
     if (currentTime < tasksArray[i].value) {
         var dataValue = tasksArray[i].value;
         var taskEl = $('ul').find("[data-hour='" + dataValue + "']")
@@ -44,7 +48,7 @@ for (i = 0, j = 9; i < tasksArray.length; i++, j++) {
     }
 }
 
-// write function to listen for a click on specific element to save data in text area to local storage
+// list for click on specific element to save data in text area to local storage
 for (let i = 9; i < 18; i++) {
 
     $("#" + i).on("click", function () {
